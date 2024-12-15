@@ -5,6 +5,12 @@ import {
     AvatarFallback,
     AvatarImage,
 } from "@/components/ui/avatar"
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip"
 import Chatbot from 'react-chatbot-kit'
 import 'react-chatbot-kit/build/main.css'
 import config from "../chatbot/config"
@@ -25,38 +31,52 @@ export function ChatbotAvatar() {
     const handleChatbotClick = () => {
         setIsChatbotVisible(!isChatbotVisible);
     };
-    // const saveMessages = (messages: any, HTMLString : any) => {
-    //     localStorage.setItem('chat_messages', JSON.stringify(messages));
-    //   };
-    
-    //   const loadMessages= () => {
-    //     const messages = JSON.parse(localStorage.getItem('chat_messages'));
-    //     return messages;
-    //   };
+    const saveMessages = (messages, HTMLString) => {
+        localStorage.setItem('chat_messages', JSON.stringify(messages));
+    };
+
+    const loadMessages = () => {
+        const messages = JSON.parse(localStorage.getItem('chat_messages'));
+        return messages;
+    };
     // Only render on client side
     if (!isClient) return null;
 
     return (
         <div>
-            <div 
-                className="bottom-10 left-[95%] right-0 z-30 fixed cursor-pointer" 
-                onClick={handleChatbotClick}
-            >
-                <Avatar>
-                    <AvatarImage src="https://e7.pngegg.com/pngimages/498/917/png-clipart-computer-icons-desktop-chatbot-icon-blue-angle-thumbnail.png" alt="@shadcn" />
-                    <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-            </div>
+           
+
+                <div
+                    className="  bottom-10 left-[95%] right-0 z-30 fixed cursor-pointer"
+                    onClick={handleChatbotClick}
+                >
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger>
+                            
+                                <Avatar>
+                                    <AvatarImage src="https://e7.pngegg.com/pngimages/498/917/png-clipart-computer-icons-desktop-chatbot-icon-blue-angle-thumbnail.png" alt="@shadcn" />
+                                    <AvatarFallback>BOT</AvatarFallback>
+                                </Avatar>
+
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>How May I help you?</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                </div>
+          
 
             {isChatbotVisible && (
-                <div className="fixed bottom-24 right-10 z-40">
-                    <Chatbot 
+                <div className="fixed bottom-24 right-10 ">
+                    <Chatbot
                         config={config}
                         messageParser={MessageParser}
                         actionProvider={ActionProvider}
-                        // messageHistory={loadMessages()}
-                        // runInitialMessagesWithHistory
-                        // saveMessages={saveMessages}
+                        messageHistory={loadMessages()}
+                        runInitialMessagesWithHistory
+                        saveMessages={saveMessages}
                     />
                 </div>
             )}

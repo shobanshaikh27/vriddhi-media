@@ -9,13 +9,13 @@ const config = {
   botName: botName,
   initialMessages: [
     createChatBotMessage(
-      `Hi! I'm ${botName}. Click on a services below to learn more!`,
+      `Hi! I'm ${botName}. Click on a service below to learn more!`,
       { widget: "serviceButtons" }
     ),
   ],
   customStyles: {
     botMessageBox: {
-      backgroundColor: '#171717',
+      backgroundColor: '#376B7E',
     },
   },
   widgets: [
