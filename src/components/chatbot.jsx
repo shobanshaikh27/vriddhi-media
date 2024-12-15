@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/avatar"
 import Chatbot from 'react-chatbot-kit'
 import 'react-chatbot-kit/build/main.css'
-import config from "../chatbot/config.js"
+import config from "../chatbot/config"
 import MessageParser from '../chatbot/MessageParser'
 import ActionProvider from '../chatbot/ActionProvider'
 import "../chatbot/Chatbot.css"
